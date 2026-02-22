@@ -1,32 +1,13 @@
-import express from 'express'
+import express from 'express';
+import userRouter from './routes/user.js';
+import courseRouter from './routes/course.js';
 
 const port = 3000;
 const app = express()
 
-app.get("/", (req, res)={
 
-})
-
-app.post("/user/signup" , (req, res)=>{
-
-})
-
-app.post("/user/signin", (req, res)=>{
-
-})
-
-app.get("/user/course", (req, res)=>{
-
-})
-
-app.get("course/purchase", (req, res)=>{
-    
-})
-
-app.get("/courses", (req, res)=>{
-
-})
-
+app.use("/user", userRouter)
+app.use("/course", courseRouter)
 
 
 app.listen(port, ()=>{
