@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "you will see full course selling app with fronted and backed",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
