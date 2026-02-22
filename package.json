@@ -1,0 +1,25 @@
+{
+  "name": "course_selling_web",
+  "version": "1.0.0",
+  "description": "you will see full course selling app with fronted and backed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnilSuva/course_selling_web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnilSuva/course_selling_web/issues"
+  },
+  "homepage": "https://github.com/AnilSuva/course_selling_web#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.1"
+  }
+}
