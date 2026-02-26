@@ -1,6 +1,6 @@
 import mongoose, { model, Schema } from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-mongoose.connect("mongodb+srv://suvaanil80_db_user:f63A6ybul69VgRMf@cluster0.aap1dxu.mongodb.net/course-app")
+
 
 const userSchema = Schema({
     email: { type: String, unique: true },
