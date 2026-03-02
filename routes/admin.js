@@ -1,6 +1,6 @@
 import express from "express"
 import { Router } from "express";
-import { adminModel } from "../db.js";
+import { adminModel, userModel } from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { string, success, z } from "zod";
@@ -13,9 +13,6 @@ adminRouter.get("/dashboard", (req, res) => {
     res.send("Admin dashboard get request is succesful")
 })
 
-adminRouter.post("/signin", (req, res) => {
-    res.send("Admin signin working")
-})
 
 adminRouter.post("/signup", async (req, res) => {
     try {
@@ -38,14 +35,47 @@ adminRouter.post("/signup", async (req, res) => {
             lastName: verifyData.lastName
         })
 
-        res.status(202).json({message: "you are signed up"})
-        // const token = jwt.sign(verifyData.password, "THERE IS NO SECRET");
-        // res.send(token);
+        res.status(202).json({ message: "you are signed up" })
 
     } catch (err) {
-        res.status(404).json("You are alredy signed in"+err)
+        res.status(404).json(err)
     }
 })
+
+
+adminRouter.post("/signin", async (req, res) => {
+    try {
+
+        const verifySchema = z.object({
+            email: z.string().max(100).min(3),
+            password: z.string().max(25).min(8)
+        })
+        const result = verifySchema.safeParse(req.body);
+
+        if (!result.success) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const {email, password} = result.data;
+        const admin = await adminModel.findOne({ email: email });
+
+
+        if (!admin) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (isMatch) {
+            res.status(200).json({ message: "Signed in successfully" })
+        } else {
+            res.json({ message: "incorrect password" })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ Message: "Server error", error: err.message });
+    }
+
+})
+
 
 adminRouter.post("/course", (req, res) => {
     res.send("Admin course is succefully post")
