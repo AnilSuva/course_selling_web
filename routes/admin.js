@@ -33,7 +33,7 @@ adminRouter.post("/signup", async (req, res) => {
             password: hashedPassword,
             firstName: verifyData.firstName,
             lastName: verifyData.lastName
-        })
+        });
 
         res.status(202).json({ message: "you are signed up" })
 
